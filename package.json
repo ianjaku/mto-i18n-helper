@@ -20,7 +20,7 @@
 				"title": "Manual.to translate"
 			}
 		],
-		"configuration":[
+		"configuration": [
 			{
 				"title": "Manual.to i18n",
 				"properties": {
@@ -30,12 +30,18 @@
 						"description": "Deepl API Key (optional for automatic translation)"
 					},
 					"mto-lang.languages.paths": {
-						"type": ["object", "null"],
+						"type": [
+							"object",
+							"null"
+						],
 						"default": null,
 						"description": "Manual.to language file paths"
 					},
 					"mto-lang.languages.master": {
-						"type": ["string", "null"],
+						"type": [
+							"string",
+							"null"
+						],
 						"default": null,
 						"description": "The master language (references a key in languages.paths)"
 					}
@@ -48,8 +54,11 @@
 		"compile": "tsc -p ./",
 		"watch": "tsc -watch -p ./",
 		"pretest": "yarn run compile && yarn run lint",
-		"lint": "eslint src --ext ts"
+		"lint": "eslint src --ext ts",
+		"package": "vsce package"
 	},
+	"license": "unlicensed",
+	"repository": {},
 	"devDependencies": {
 		"@types/glob": "^7.2.0",
 		"@types/mocha": "^9.1.1",
@@ -61,7 +70,8 @@
 		"eslint": "^8.18.0",
 		"glob": "^8.0.3",
 		"mocha": "^10.0.0",
-		"typescript": "^4.7.4"
+		"typescript": "^4.7.4",
+		"vsce": "^2.9.3"
 	},
 	"dependencies": {
 		"axios": "^0.27.2"
