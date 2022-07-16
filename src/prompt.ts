@@ -8,6 +8,10 @@ export const promptForTranslationKey = async (): Promise<string | null> => {
     prompt: "Key of the sentece in the translation file",
     placeHolder: "Edit_Something",
   });
+  if (translationKey?.includes(" ")) {
+    vscode.window.showErrorMessage("Translation key cannot contain spaces");
+    return null;
+  }
   return translationKey ?? null;
 };
 
