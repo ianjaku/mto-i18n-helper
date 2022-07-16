@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import * as vscode from "vscode";
 import axios from "axios";
 import { findConfig } from "./config";
 

@@ -2,22 +2,24 @@ import * as vscode from 'vscode';
 import { findSuggestions, translate } from './translate';
 import { updateTranslationFiles } from './languageFile';
 import { findConfig } from './config';
-import { promptFOrTranslationKey, promptForTranslations } from './prompt';
+import { promptForTranslationKey, promptForTranslations } from './prompt';
+import { withMaybeReplaceSelectedText } from './replaceSelectedText';
 
 
 export function activate(context: vscode.ExtensionContext) {
 
 	const translateCommand = vscode.commands.registerCommand('mto-lang.translate', async () => {
-		// Current selection
+		withMaybeReplaceSelectedText(async (selectedText?: string) => {
+			const translationKey = await promptForTranslationKey();
+			if (translationKey == null) return null;
 
-		
-		const translationKey = await promptFOrTranslationKey();
-		if (translationKey == null) return;
+			const translations = await promptForTranslations(selectedText);
+			if (translations == null) return null;
 
-		const translations = await promptForTranslations();
-		if (translations == null) return;
+			await updateTranslationFiles(translationKey, translations);
 
-		await updateTranslationFiles(translationKey, translations);
+			return translationKey;
+		});
 	});
 
 	context.subscriptions.push(translateCommand);
